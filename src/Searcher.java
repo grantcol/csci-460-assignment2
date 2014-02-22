@@ -41,9 +41,13 @@ public class Searcher {
 			else if(heur.equals("h2")) {
 				for(Node n : nodes) {
 					greedyH2Sort.offer(n);
+					System.out.println("node: "+n.name);
 				}
 				while(!greedyH2Sort.isEmpty()){
-					queue.addFirst(greedyH2Sort.poll());
+					Node temp = greedyH2Sort.poll();
+					System.out.println("node: "+temp.name+" "+temp.h2);
+					if(temp.visited == false)
+						queue.addFirst(temp);
 				}			
 			}
 		}

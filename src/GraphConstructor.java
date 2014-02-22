@@ -38,6 +38,7 @@ public class GraphConstructor {
 			}
 			else if(s.contains("#")) {
 				String[] p1 = s.split("#");
+				
 				String name = p1[0];
 				int h1 = Integer.parseInt(p1[1]);
 				int h2 = Integer.parseInt(p1[2]);
