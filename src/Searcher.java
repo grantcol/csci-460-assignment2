@@ -10,8 +10,12 @@ public class Searcher {
 	public LinkedList<Node> solutionStack; //holds solution values
 	private Comparator<Node> h1Comparator = new NodeH1Comparator();
 	private Comparator<Node> h2Comparator = new NodeH2Comparator();
+	private Comparator<Node> astarH1Comparator = new NodeH1AstarComparator();
+	private Comparator<Node> astarH2Comparator = new NodeH2AstarComparator();
 	private PriorityQueue<Node> greedyH1Sort = new PriorityQueue<Node>(10, h1Comparator);
 	private PriorityQueue<Node> greedyH2Sort = new PriorityQueue<Node>(10, h2Comparator);
+	private PriorityQueue<Node> astarH1Sort = new PriorityQueue<Node>(10, astarH1Comparator);
+	private PriorityQueue<Node> astarH2Sort = new PriorityQueue<Node>(10, astarH2Comparator);
 
 	public Searcher(){
 		queue = new LinkedList<Node>();
@@ -25,7 +29,6 @@ public class Searcher {
 	}
 
 	public void queueGreedy(String heur, List<Node> nodes) {
-		System.out.println("greedily queueing");
 		if(!nodes.isEmpty() && unvisited(nodes)) {
 			if(heur.equals("h1")) {
 				for(Node n : nodes) {
@@ -56,8 +59,42 @@ public class Searcher {
 		}
 	}
 
-	public void queueAStar(List<Node> nodes) {
-
+	public void queueAStar(String heur, Node parent, List<Node> nodes) {
+		if(!nodes.isEmpty() && unvisited(nodes)) {
+			if(heur.equals("h1")) {
+				for(Node n : nodes) {
+					if(!n.visited) {
+						n.setCost(parent.cost+parent.costs.get(n.name));
+						System.out.println(n.name+" "+n.cost);
+						astarH1Sort.offer(n);
+					}
+				}
+				while(!astarH1Sort.isEmpty()) {
+					Node temp = astarH1Sort.poll();
+					if(temp.visited == false) {
+						queue.addFirst(temp);
+					}
+				}
+			}
+			else if(heur.equals("h2")) {
+				for(Node n : nodes) {
+					if(!n.visited) {
+						n.setCost(parent.cost+parent.costs.get(n.name));
+						System.out.println(n.name+" "+n.cost);
+						astarH2Sort.offer(n);
+					}
+				}
+				while(!astarH2Sort.isEmpty()) {
+					Node temp = astarH2Sort.poll();
+					if(temp.visited == false) {
+						queue.addFirst(temp);
+					}
+				}
+			}
+		}
+		else {
+			this.queue.pop();
+		}
 	}
 
 	public void queueBFS(List<Node> nodes) {
@@ -218,15 +255,41 @@ public class Searcher {
 			return 0;
 		}
 	}
+	public class NodeH1AstarComparator implements Comparator<Node> {
+		@Override
+		public int compare(Node o1, Node o2) {
+			// TODO Auto-generated method stub
+			if((o1.cost + o1.h1) > (o2.cost + o2.h1)) {
+				return 1;
+			}
+			if((o1.cost + o1.h1) < (o2.cost + o1.h1)) {
+				return -1;
+			}
+			return 0;
+		}
+	}
+	public class NodeH2AstarComparator implements Comparator<Node> {
+		@Override
+		public int compare(Node o1, Node o2) {
+			// TODO Auto-generated method stub
+			if((o1.cost + o1.h2) > (o2.cost + o2.h2)) {
+				return -1;
+			}
+			if((o1.cost + o1.h2) < (o2.cost + o1.h2)) {
+				return 1;
+			}
+			return 0;
+		}
+	}
 	public class NodeH1Comparator implements Comparator<Node> {
 		@Override
 		public int compare(Node o1, Node o2) {
 			// TODO Auto-generated method stub
 			if(o1.h1 > o2.h1) {
-				return -1;
+				return 1;
 			}
 			if(o1.h1 < o2.h1) {
-				return 1;
+				return -1;
 			}
 			return 0;
 		}
