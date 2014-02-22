@@ -60,36 +60,29 @@ public class Searcher {
 	}
 
 	public void queueAStar(String heur, Node parent, List<Node> nodes) {
+		System.out.println(parent.name);
 		if(!nodes.isEmpty() && unvisited(nodes)) {
 			if(heur.equals("h1")) {
 				for(Node n : nodes) {
 					if(!n.visited) {
 						n.setCost(parent.cost+parent.costs.get(n.name));
 						System.out.println(n.name+" "+n.cost);
-						astarH1Sort.offer(n);
+						if(!queueContains(n.name) && !stackContains(n.name))
+							queue.add(n);
 					}
 				}
-				while(!astarH1Sort.isEmpty()) {
-					Node temp = astarH1Sort.poll();
-					if(temp.visited == false) {
-						queue.addFirst(temp);
-					}
-				}
+				reorderAstar("h1");
 			}
 			else if(heur.equals("h2")) {
 				for(Node n : nodes) {
 					if(!n.visited) {
 						n.setCost(parent.cost+parent.costs.get(n.name));
 						System.out.println(n.name+" "+n.cost);
-						astarH2Sort.offer(n);
+						if(!queueContains(n.name) && !stackContains(n.name))
+							queue.add(n);
 					}
 				}
-				while(!astarH2Sort.isEmpty()) {
-					Node temp = astarH2Sort.poll();
-					if(temp.visited == false) {
-						queue.addFirst(temp);
-					}
-				}
+				reorderAstar("h2");
 			}
 		}
 		else {
@@ -241,7 +234,34 @@ public class Searcher {
 			System.out.println(nn.name+" "+nn.cost);
 		}
 	}
-
+	public void reorderAstar(String heur) {
+		LinkedList<Node> orderedSearchQueue = new LinkedList<Node>();
+		System.out.println("REORDERING VIA ASTAR");
+		if(heur.equals("h1")) {
+			for(Node n : this.queue) {
+				astarH1Sort.offer(n);
+			}
+			while(!astarH1Sort.isEmpty()) {
+				Node temp = astarH1Sort.poll();
+				if(!stackContains(temp.name))
+					orderedSearchQueue.push(temp);
+			}
+		}
+		else if(heur.equals("h2")) {
+			for(Node n : this.queue) {
+				astarH2Sort.offer(n);
+			}			
+			while(!astarH2Sort.isEmpty()) {
+				Node temp = astarH2Sort.poll();
+				orderedSearchQueue.add(temp);
+			}
+		}
+		for(Node n : orderedSearchQueue) {
+			System.out.println("Node in queue: "+n.name+" H(x) = "+(n.cost+n.h1));
+		}
+		System.out.println("-------------------");
+		this.queue = orderedSearchQueue;
+	}
 	public class NodeCostComparator implements Comparator<Node> {
 		@Override
 		public int compare(Node o1, Node o2) {
@@ -260,10 +280,10 @@ public class Searcher {
 		public int compare(Node o1, Node o2) {
 			// TODO Auto-generated method stub
 			if((o1.cost + o1.h1) > (o2.cost + o2.h1)) {
-				return 1;
+				return -1;
 			}
 			if((o1.cost + o1.h1) < (o2.cost + o1.h1)) {
-				return -1;
+				return 1;
 			}
 			return 0;
 		}
@@ -286,10 +306,10 @@ public class Searcher {
 		public int compare(Node o1, Node o2) {
 			// TODO Auto-generated method stub
 			if(o1.h1 > o2.h1) {
-				return 1;
+				return -1;
 			}
 			if(o1.h1 < o2.h1) {
-				return -1;
+				return 1;
 			}
 			return 0;
 		}
