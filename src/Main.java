@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 
 public class Main {
@@ -34,7 +33,8 @@ public class Main {
 				sq.pushStack(next);
 				break;
 			}
-			
+			sq.queueGreedy("h1", next.expand());
+			//sq.queueGreedy("h2", next.expand());
 			//sq.queueDFS(next.expand());
 			//sq.queueBFS(next.expand());
 			//sq.queueUCS(next, next.expand());
@@ -46,7 +46,7 @@ public class Main {
 		System.out.println("SOLUTION");
 		System.out.println("-----------------");
 		for(int i = solution.size()-1; i >=0 ; i--) {
-			System.out.println(solution.get(i).name);
+			System.out.println(solution.get(i).name+" h1: "+solution.get(i).h1+" h2: "+solution.get(i).h1);
 		}
 	}
 }
