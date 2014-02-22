@@ -51,7 +51,7 @@ public class GraphConstructor {
 			//printNodes();
 		}
 		for(Node n : nodes) {
-			System.out.println("Name: "+n.name+" h1: "+n.h1+" h2: "+n.h2);
+			//System.out.println("Name: "+n.name+" h1: "+n.h1+" h2: "+n.h2);
 			sg.addNode(n);
 		}
 		return sg;
