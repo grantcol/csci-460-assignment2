@@ -10,9 +10,7 @@ Just uncomment the correct lines (59-65)
 	//sq.queueAStar("h2", next, next.expand());
 </pre> 
 Then navigate to the root of the folder where the project was unzipped and run 
-<pre>
-	java Main
-</pre>
+<pre>java Main</pre>
 and the project should compile and run. 
 
 If running the search.jar 
