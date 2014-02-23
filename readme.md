@@ -4,10 +4,10 @@ The program will run Greedy and A* search algorithms on the given input (for the
 ##Compilation/Run
 Just uncomment the correct lines (59-65)
 <pre>
-	sq.queueGreedy("h1", next.expand());
-	//sq.queueGreedy("h2", next.expand());
-	//sq.queueAStar("h1", next, next.expand());
-	//sq.queueAStar("h2", next, next.expand());
+sq.queueGreedy("h1", next.expand());
+//sq.queueGreedy("h2", next.expand());
+//sq.queueAStar("h1", next, next.expand());
+//sq.queueAStar("h2", next, next.expand());
 </pre> 
 Then navigate to the root of the folder where the project was unzipped and run 
 <pre>java Main</pre>
