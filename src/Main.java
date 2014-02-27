@@ -56,9 +56,9 @@ public class Main {
 				else if(heur.equals("h2"))
 					sq.queueAStar("h2", next, next.expand());
 			}*/
-			sq.queueAStar("h1", next, next.expand());
+			//sq.queueAStar("h1", next, next.expand());
 			//sq.queueAStar("h2", next, next.expand());
-			//sq.queueGreedy("h1", next.expand());
+			sq.queueGreedy("h1", next.expand());
 			//sq.queueGreedy("h2", next.expand());
 			//sq.queueDFS(next.expand());
 			//sq.queueBFS(next.expand());

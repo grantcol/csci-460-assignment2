@@ -32,6 +32,12 @@ public class Searcher {
 		if(!nodes.isEmpty() && unvisited(nodes)) {
 			if(heur.equals("h1")) {
 				for(Node n : nodes) {
+					if(n.visited == false)
+						queue.add(n);
+					
+				}
+				reorderGreedy("h1");
+				/*for(Node n : nodes) {
 					greedyH1Sort.offer(n);
 					System.out.println("node: "+n.name);
 				}
@@ -39,10 +45,15 @@ public class Searcher {
 					Node temp = greedyH1Sort.poll();
 					if(temp.visited == false)
 						queue.addFirst(temp);
-				}
+				}*/
 			}
 			else if(heur.equals("h2")) {
 				for(Node n : nodes) {
+					if(n.visited == false)
+						queue.add(n);
+				}
+				reorderGreedy("h2");
+				/*for(Node n : nodes) {
 					greedyH2Sort.offer(n);
 					System.out.println("node: "+n.name);
 				}
@@ -51,7 +62,8 @@ public class Searcher {
 					System.out.println("node: "+temp.name+" "+temp.h2);
 					if(temp.visited == false)
 						queue.addFirst(temp);
-				}			
+				}
+				 */		
 			}
 		}
 		else {
@@ -233,6 +245,34 @@ public class Searcher {
 		for(Node nn : queue) {
 			System.out.println(nn.name+" "+nn.cost);
 		}
+	}
+	public void reorderGreedy(String heur) {
+		LinkedList<Node> orderedSearchQueue = new LinkedList<Node>();
+		System.out.println("REORDERING GREEDILY");
+		if(heur.equals("h1")) {
+			for(Node n : this.queue) {
+				greedyH1Sort.offer(n);
+			}
+			while(!greedyH1Sort.isEmpty()) {
+				Node temp = greedyH1Sort.poll();
+				if(!stackContains(temp.name))
+					orderedSearchQueue.push(temp);
+			}
+		}
+		else if(heur.equals("h2")) {
+			for(Node n : this.queue) {
+				greedyH2Sort.offer(n);
+			}			
+			while(!greedyH2Sort.isEmpty()) {
+				Node temp = astarH2Sort.poll();
+				orderedSearchQueue.add(temp);
+			}
+		}
+		for(Node n : orderedSearchQueue) {
+			System.out.println("Node in queue: "+n.name+" H(x) = "+(n.cost+n.h1));
+		}
+		System.out.println("-------------------");
+		this.queue = orderedSearchQueue;
 	}
 	public void reorderAstar(String heur) {
 		LinkedList<Node> orderedSearchQueue = new LinkedList<Node>();
