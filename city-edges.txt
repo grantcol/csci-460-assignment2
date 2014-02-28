@@ -1,0 +1,30 @@
+Alexandria-Matruh:159
+Alexandria-Cairo:112
+Alexandria-Nekhel:245
+Matruh-Siwa:181
+Nekhel-Suez:72
+Nekhel-Quseir:265
+Cairo-Asyut:198
+Cairo-Bawiti:186
+Siwa-Bawiti:210
+Bawiti-Qasr Farafra:104
+Quseir-Sohag:163
+Sohag-Quena:69
+Sohag-Mut:184
+Quena-Luxor:33
+Mut-Kharga:98
+Mut-Sohag:184
+Qasr Farafra-Mut:126
+Matruh#174#189
+Cairo#126#139
+Nekhel#133#145
+Siwa#132#148
+Bawiti#105#118
+Asyut#52#67
+Suez#121#136
+Qasr Farafra#68#77
+Quseir#55#59
+Mut#51#65
+Kharga#24#38
+Sohag#27#36
+Quena#10#19
