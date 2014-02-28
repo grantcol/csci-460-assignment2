@@ -14,7 +14,7 @@ Then navigate to the root of the folder where the project was unzipped and run
 and the project should compile and run. 
 
 If running the search.jar 
-<pre>java -jar infsearch.jar</pre> 
+<pre>java -jar informed.jar</pre> 
 follow the prompts and input "greedy" or "astar" to choose the algoritm. Then input "h1" or "h2" to select a heuristic 
 
 The result is a print of all visited nodes in the order in which they were visited.
