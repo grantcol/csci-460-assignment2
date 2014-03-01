@@ -13,11 +13,11 @@ Then navigate to the root of the folder where the project was unzipped and run
 <pre>java Main</pre>
 and the project should compile and run. 
 
-If running the search.jar 
+If running the executable jar 
 <pre>java -jar informed.jar</pre> 
 follow the prompts and input "greedy" or "astar" to choose the algoritm. Then input "h1" or "h2" to select a heuristic 
 
-The result is a print of all visited nodes in the order in which they were visited.
+The result is a print of all visited nodes in the order in which they were visited and a count of all nodes expanded.
 
 ##Performance
 1. Regarding A* performance under h1 and h2: there is no difference with the given data set. The number of nodes traversed by the A* algorithm is 15 either way. The heuristics were balanced out by the path cost to the node in case of this data set. Take for example Nekhel and Matruh, which had h1 of 174 and 133 and h2 of 189 145, however, the path cost to Nekhel is 245 which is large enough to negate this difference in the A* traversal of both heuristics. This is strictly due to the chosen data points and the performance may differ if h1 and h2 were applied to a different map.
